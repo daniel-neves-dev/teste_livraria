@@ -53,8 +53,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_192635) do
 
   create_table "parts", force: :cascade do |t|
     t.string "part_number"
+    t.bigint "supplier_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["supplier_id"], name: "index_parts_on_supplier_id"
   end
 
   create_table "suppliers", force: :cascade do |t|
@@ -67,4 +69,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_192635) do
   add_foreign_key "assembly_parts", "assemblies"
   add_foreign_key "assembly_parts", "parts"
   add_foreign_key "books", "authors"
+  add_foreign_key "parts", "suppliers"
 end
